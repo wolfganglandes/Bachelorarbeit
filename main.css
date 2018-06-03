@@ -1,0 +1,93 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+	table-layout: fixed;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 2px;
+	overflow: hidden;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.participant{
+	padding: 10px;
+	border: 1px solid black;
+	width: 350px;
+	position: relative;
+    float: left;
+	margin: 10px;
+}
+
+#sidebar{
+	padding: 10px;
+	position:relative;
+	float:right;
+	right:0px;
+	border: 1px solid black;
+	width: 250px;
+	height: 600px;
+	background-color: lightblue;
+}
+
+#orderbook{
+	float left;
+	
+	border: 1px solid black;
+	width: 100%;
+	background-color: lightblue;
+	
+}
+select{
+	padding 5px;
+}
+div{
+	padding: 2px;
+}
+body {
+	font-size: 14px;
+    background-color: #F0F0F0;
+    padding: 0em;
+    font-family: 'Raleway','Source Sans Pro', 'Arial';
+}
+
+label {
+    display:block;
+    margin-bottom:5px;
+}
+
+input {
+    padding: 5px;
+    width: 50%;
+    margin-bottom: 5px;
+}
+
+img{
+	width: 50px;
+	float: right;
+}
+button {
+    margin:  5px;;
+    padding: 1em 1em;
+    display:block;
+}
+
+#sidebarCompany, #sidebarRenewable, #CompanyOption2, #CompanyOption3, #CompanyOption4, #CompanyOption5, #CompanyOption6,
+#factoryPic1,#factoryPic2,#factoryPic3, #factoryPic4,#factoryPic5,
+renewablePic1,#renewablePic2,#renewablePic3,#renewablePic4,renewablePic5{
+	display: none;
+}
+#iconCreditAuthor {
+	position: fixed;
+  padding: 10px;
+  bottom: 0;
+  
+  right: 0;
+	
+}

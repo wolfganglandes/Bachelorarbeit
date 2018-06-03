@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+
+</head>
+<body>
+	<container >
+	<table id="orderbook">
+  <tr id="orderMenu">
+	<th>Addresse</th>
+    <th>CC/ETH</th>
+    <th>CC</th>
+    <th>Eth</th>
+	<th>Ablaufzeitpunkt</th>
+	<th>Nonce</th>
+	<th>Noch Verfügbar</th>
+	
+  </tr>
+ 
+  
+</table>
+		
+	</container>
+	<container id="sidebar">
+		
+	<select id="sidebarSelect" onchange="sidebarSelectHandler(this)">
+			<option value='regulator'>Verwaltungsstelle</option>
+  			<option value='company'>Unternehmen</option>
+  			<option value='renew'>Erzeuger Erneuerbarer Energien</option>	
+	</select>
+	
+		<div id="sidebarRegulator">
+		
+			<strong>Registriere Teilnehmer:</strong>
+		
+		 <label for="nameCreate" class="col-lg-2 control-label">Teilnehmer Name</label>
+        <input id="nameCreate" type="text">
+		
+		<label for="addressCreate" class="col-lg-2 control-label">Teilnehmer Addresse</label>
+        <input id="addressCreate" type="text">
+		
+		 <label for="stillAllowedCreate" class="col-lg-2 control-label">Frei käufliche Token</label>
+        <input id="stillAllowedCreate" type="text">
+		 
+		Teilnehmer Typ:
+		<select id="renewCreate">
+  			<option value='false'>Unternehmen</option>
+  			<option value='true'>Erzeuger Erneuerbarer Energien</option>	
+		</select>
+
+		<button id="registerParticipant">Registriere Teilnehmer</button>
+			
+		<button id="registertestParticipants">Registriere Beispielteilnehmer (2 Unternehmen, 1 Erneuerbare Energie)</button>
+		 </div>
+		
+		<div id="sidebarCompany"> 
+			
+		<select id="selectCompanyOptions" onchange="selectCompanyOptions(this)">
+			<option value='CompanyOption1'>Token kaufen vom Smart Contract</option>
+  			<option value='CompanyOption2'>Token Angebot erstellen</option>
+  			<option value='CompanyOption3'>Token Angebot kaufen</option>	
+			<option value='CompanyOption4'>Token Angebot zurücknehmen</option>
+			<option value='CompanyOption5'>Token burnen</option>
+			<option value='CompanyOption6'>In erneuerbare Energien investieren</option>
+	</select>
+			
+			
+		<div id="CompanyOption1">
+			 <label for="accountbuyToken" class="col-lg-2 control-label">Account:</label>
+        	 <input id="accountbuyToken" type="text">
+		 
+			 <label for="valuebuyToken" class="col-lg-2 control-label">Menge in Ether:</label>
+        	 <input id="valuebuyToken" type="text">
+
+		<button id="buyToken">Token kaufen vom Smart Contract</button>
+		
+			
+			
+		</div>
+		<div id="CompanyOption2">
+			<label for="accountCreateOrder" class="col-lg-2 control-label">Account:</label>
+        	 <input id="accountCreateOrder" type="text">
+			
+			<label for="createetherGet" class="col-lg-2 control-label">Menge Ether:</label>
+        	 <input id="createetherGet" type="text">
+		 
+			 <label for="createtokenGive" class="col-lg-2 control-label">Menge an Token:</label>
+        	 <input id="createtokenGive" type="text">
+		
+			<label for="createtimeWindow" class="col-lg-2 control-label">Dauer des Angebots in Blöcken (1000 Blöcke = 1Woche?!):</label>
+        	 <input id="createtimeWindow" type="text">
+			
+			<label for="createNounce" class="col-lg-2 control-label">Zusatzzahl (falls gleiches Angebot mehrmals)</label>
+        	 <input id="createNounce" type="text">
+		
+		<button id="createOrder">Angebot erstellen</button>
+		</div>
+			
+			
+		<div id="CompanyOption3">
+			
+		<label for="accountTakeOrder" class="col-lg-2 control-label">Eigener Account:</label>
+        	 <input id="accountTakeOrder" type="text">
+			
+			<label for="amountEtherTake" class="col-lg-2 control-label">Menge Ether die ich kaufe:</label>
+        	 <input id="amountEtherTake" type="text">
+			
+			
+			Angebot Details:
+			
+			<label for="orderAccount" class="col-lg-2 control-label">Anbietender Account:</label>
+        	 <input id="orderAccount" type="text">
+			
+			<label for="takeetherGet" class="col-lg-2 control-label">Menge Ether:</label>
+        	 <input id="takeetherGet" type="text">
+		 
+			 <label for="taketokenGive" class="col-lg-2 control-label">Menge an Token:</label>
+        	 <input id="taketokenGive" type="text">
+		
+			<label for="taketimeWindow" class="col-lg-2 control-label">Dauer des Angebots in Blöcken (1000 Blöcke = 1Woche?!):</label>
+        	 <input id="taketimeWindow" type="text">
+			
+			<label for="takeNounce" class="col-lg-2 control-label">Zusatzzahl (falls gleiches Angebot mehrmals)</label>
+        	 <input id="takeNounce" type="text">
+		
+		<button id="takeOrder">Angebot kaufen</button></div>
+			
+			
+			
+		<div id="CompanyOption4">
+			
+			<label for="accountcancelOrder" class="col-lg-2 control-label">Account:</label>
+        	 <input id="accountcancelOrder" type="text">
+			
+			<label for="canceletherGet" class="col-lg-2 control-label">Menge Ether:</label>
+        	 <input id="canceletherGet" type="text">
+		 
+			 <label for="canceltokenGive" class="col-lg-2 control-label">Menge an Token:</label>
+        	 <input id="canceltokenGive" type="text">
+		
+			<label for="canceltimeWindow" class="col-lg-2 control-label">Dauer des Angebots in Blöcken (1000 Blöcke = 1Woche?!):</label>
+        	 <input id="canceltimeWindow" type="text">
+			
+			<label for="cancelNounce" class="col-lg-2 control-label">Zusatzzahl (falls gleiches Angebot mehrmals)</label>
+        	 <input id="cancelNounce" type="text">
+		
+		<button id="cancelOrder">Token Angebot zurücknehmen</button>
+			</div>
+			
+		<div id="CompanyOption5">
+			<label for="accountburnToken" class="col-lg-2 control-label">Account:</label>
+        	 <input id="accountburnToken" type="text">
+		 
+			 <label for="amountburnToken" class="col-lg-2 control-label">Anzahl an Token:</label>
+        	 <input id="amountburnToken" type="text">
+
+		<button id="burnToken">Token burnen</button></div>
+			
+		<div id="CompanyOption6">
+			<label for="accountbuyGreen" class="col-lg-2 control-label">Eigener Account:</label>
+        	 <input id="accountbuyGreen" type="text">
+		 
+			 <label for="amountbuyGreen" class="col-lg-2 control-label">Anzahl an Token:</label>
+        	 <input id="amountbuyGreen" type="text">
+			
+			<label for="addressGreen" class="col-lg-2 control-label">Addresse der Erneuerbaren Energien:</label>
+        	 <input id="addressGreen" type="text">
+
+		<button id="buyGreen">Erneuerbare Energien kaufen</button>
+			</div>
+		</div>
+		<div id="sidebarRenewable">
+			
+		<label for="accountBurnAndWithdaw" class="col-lg-2 control-label">Account:</label>
+        	 <input id="accountBurnAndWithdaw" type="text">
+		 
+			 <label for="amountBurnAndWithdaw" class="col-lg-2 control-label">Anzahl Token:</label>
+        	 <input id="amountBurnAndWithdaw" type="text">
+
+		<button id="BurnAndWithdaw">Token gegen Ether im Smart Contract tauschen</button>
+		</div>
+	
+	
+	</container>
+	
+	<container><div class="participant">
+		<img src="etherum.png" alt="Selfhtml">
+		<strong id="name0">Smart Contract</strong>
+		<div id="accountSM"></div>
+		
+		<div id="tokenPrice"></div>
+		<div id="punishPrice"></div>
+		
+		<div id="etherSM"></div>
+		<div id="totalSupply"></div>
+		<div id="withdrawPrice"></div>
+		
+		
+	</div>
+	<div id="participant1" class="participant">
+		<img id="factoryPic1" src="factory.png" alt="Selfhtml">
+		<img id="renewablePic1" src="renewable-energy.png" alt="Selfhtml">
+		<strong id="name1">asdf</strong>
+		<div id="account1"></div>
+		<div id="renew1"></div>
+		<div id="ether1"></div>
+		<div id="token1"></div>
+		<div id="allowed1"></div>
+		<div id="invested1"></div>
+		<div id="burned1"></div>
+		
+	</div>
+	<div id="participant2" class="participant">
+		<img id="factoryPic2" src="factory.png" alt="Selfhtml">
+		<img id="renewablePic2" src="renewable-energy.png" alt="Selfhtml">
+		<strong id="name2">asdf</strong>
+		<div id="account2"></div>
+		<div id="renew2"></div>
+		<div id="ether2"></div>
+		<div id="token2"></div>
+		<div id="allowed2"></div>
+		<div id="invested2"></div>
+		<div id="burned2"></div>
+	</div>
+	<div id="participant3" class="participant">
+		<img id="factoryPic3" src="factory.png" alt="Selfhtml">
+		<img id="renewablePic3" src="renewable-energy.png" alt="Selfhtml">
+		<strong id="name3">asdf</strong>
+		<div id="account3"></div>
+		<div id="renew3"></div>
+		<div id="ether3"></div>
+		<div id="token3"></div>
+		<div id="allowed3"></div>
+		<div id="invested3"></div>
+		<div id="burned3"></div>
+	</div>
+	<div id="participant4" class="participant">
+		<strong id="name4">asdf</strong>
+		<img id="factoryPic4" src="factory.png" alt="Selfhtml">
+		<img id="renewablePic4" src="renewable-energy.png" alt="Selfhtml">
+		<div id="account4"></div>
+		<div id="renew4"></div>
+		<div id="ether4"></div>
+		<div id="token4"></div>
+		<div id="allowed4"></div>
+		<div id="invested4"></div>
+		<div id="burned4"></div>
+	</div>
+	<div id="participant5" class="participant">
+		<img id="factoryPic5" src="factory.png" alt="Selfhtml">
+		<img id="renewablePic5" src="renewable-energy.png" alt="Selfhtml">
+		<strong id="name5">asdf</strong>
+		<div id="account5"></div>
+		<div id="renew5"></div>
+		<div id="ether5"></div>
+		<div id="token5"></div>
+		<div id="allowed5"></div>
+		<div id="invested5"></div>
+		<div id="burned5"></div>
+	</div>
+	</container>
+	
+	<div id="iconCreditAuthor">Icons made by <a href="https://www.flaticon.com/authors/monkik" title="monkik">monkik</a>,<a href="http://www.freepik.com" title="Freepik">Freepik</a>,<a href="https://www.flaticon.com/authors/becris" title="Becris">Becris</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+	
+    
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="contract_ABI.js"></script>
+	<script src="app.js"></script>
+   
+</body>
+</html>
